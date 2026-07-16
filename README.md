@@ -63,7 +63,10 @@ Roadmap:
 3. **workflows-reproducibles** — recetas ejecutables para patrones
    repetidos de orquestación (feature completa, review cruzado GPT/Claude,
    investigación paralela). Primero como skills; Agent SDK cuando las
-   skills se queden cortas.
+   skills se queden cortas. Incluye rediseño de agentes: de roster por
+   tier (scout/explorer-lite/...) a roles con nivel parametrizado en el
+   prompt y modelo por override de invocación (effort queda fijo por rol —
+   límite del harness: el Agent tool solo permite override de `model`).
 
 Futuro (nice to have): desplegar el sistema a otros harnesses (codex CLI,
 opencode) o un harness propio. La estructura por-directorios (`.codex/`,
