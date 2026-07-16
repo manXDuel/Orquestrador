@@ -1,0 +1,6 @@
+# Tooling opsx generado por el CLI de openspec (regenerable, no es parte del sistema)
+.claude/commands/opsx/
+.claude/skills/openspec-*/
+.codex/skills/openspec-*/
+.opencode/commands/opsx-*.md
+.opencode/skills/openspec-*/
