@@ -59,7 +59,7 @@ Roadmap:
 
 1. **consolidar-v0** — este repo como fuente de verdad reconstruible. ✅
 2. **evolución-vía-openspec** — convención de gobernanza: todo cambio al
-   sistema pasa por change; contexto real en `openspec/config.yaml`.
+   sistema pasa por change; contexto real en `openspec/config.yaml`. ✅
 3. **workflows-reproducibles** — recetas ejecutables para patrones
    repetidos de orquestación (feature completa, review cruzado GPT/Claude,
    investigación paralela). Primero como skills; Agent SDK cuando las

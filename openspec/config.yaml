@@ -1,20 +1,26 @@
 schema: spec-driven
 
-# Project context (optional)
-# This is shown to AI when creating artifacts.
-# Add your tech stack, conventions, style guides, domain knowledge, etc.
-# Example:
-#   context: |
-#     Tech stack: TypeScript, React, Node.js
-#     We use conventional commits
-#     Domain: e-commerce platform
+context: |
+  Sistema personal de orquestación multiagente/multimodelo. Este repo es la
+  fuente de verdad reconstruible: lo desplegado en ~/.claude/ son symlinks
+  a estos archivos (ver spec system-sync e install.sh).
 
-# Per-artifact rules (optional)
-# Add custom rules for specific artifacts.
-# Example:
-#   rules:
-#     proposal:
-#       - Keep proposals under 500 words
-#       - Always include a "Non-goals" section
-#     tasks:
-#       - Break tasks into chunks of max 2 hours
+  Piezas:
+  - core/CLAUDE.md — política de orquestación (prioridades, Tabla 1 de
+    modelos, delegación, fallos, invocación). Cargada en todo prompt de
+    toda sesión de Claude Code.
+  - agents/*.md — roster de 5 agentes (scout, explorer-lite, builder,
+    reviewer, sub-orchestrator).
+  - skills/orchestrate — escala 1-10 y mapeo modelo+esfuerzo→nivel.
+  - docs/*.md — invocación de GPT vía codex CLI y claudex.
+  - openspec/specs/ — capacidades del sistema como specs verificables.
+
+  Gobernanza (spec governance): todo cambio SEMÁNTICO al sistema (política,
+  agentes, skills, docs, specs) pasa por openspec change — proposal captura
+  el porqué, delta-spec actualiza la spec, archive deja historia. Cambio
+  COSMÉTICO (typos, formato, reordenar sin cambiar significado) va directo
+  a commit. Sin mecanismo de enforcement por ahora: convención escrita;
+  hooks/pre-commit solo si la convención falla en la práctica.
+
+  Convenciones: proposals concisos con Non-goals explícitos; specs en
+  español; commits estilo conventional commits en español.

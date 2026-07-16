@@ -118,4 +118,7 @@ Delegación:
   aprobación también antes de ampliar permisos, acceder a información
   sensible o usar un entorno sin aislamiento; no la re-pidas en reintentos
   que no amplíen el alcance autorizado.
+- Cambios al sistema de orquestación (esta política, agentes, skills, docs)
+  → openspec change en `~/Documentos/Personal/Orquestrador`; nunca edición
+  directa.
 - Una instrucción explícita del usuario manda sobre estas tablas.
