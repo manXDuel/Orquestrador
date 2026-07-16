@@ -1,5 +1,9 @@
 # model-invocation
 
+## Purpose
+
+Definir la vía de invocación de cada proveedor de modelos y los permisos mínimos por run.
+
 ## Requirements
 
 

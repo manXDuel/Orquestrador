@@ -1,5 +1,9 @@
 # delegation-scale
 
+## Purpose
+
+Regir cómo se puntúa cada tarea en la escala 1-10 y se elige la combinación modelo+esfuerzo mínima que la cubre.
+
 ## Requirements
 
 

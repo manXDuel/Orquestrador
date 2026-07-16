@@ -1,5 +1,9 @@
 # system-sync
 
+## Purpose
+
+Garantizar que el repo es la fuente de verdad reconstruible del sistema vía symlinks e install idempotente.
+
 ## Requirements
 
 

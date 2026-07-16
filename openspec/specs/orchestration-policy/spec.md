@@ -1,5 +1,9 @@
 # orchestration-policy
 
+## Purpose
+
+Definir la política de orquestación multimodelo: prioridades, Tabla 1, restricciones y fallos.
+
 ## Requirements
 
 

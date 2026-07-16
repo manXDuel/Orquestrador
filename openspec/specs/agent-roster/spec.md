@@ -1,5 +1,9 @@
 # agent-roster
 
+## Purpose
+
+Definir el roster de agentes del sistema: nivel en la escala, modelo, esfuerzo y límites de cada uno.
+
 ## Requirements
 
 
