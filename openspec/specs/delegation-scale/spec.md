@@ -3,16 +3,17 @@
 ## Purpose
 
 Regir cómo se puntúa cada tarea en la escala 1-10 y se elige la combinación modelo+esfuerzo mínima que la cubre.
-
 ## Requirements
-
-
 ### Requirement: Puntuación previa a toda delegación
-Antes de lanzar cualquier subagente, el orquestador SHALL puntuar la tarea en la escala 1-10 y elegir la combinación modelo+esfuerzo más barata que la cubra. Nunca se delega a un modelo con capacidad muy superior a la necesaria.
+Antes de lanzar cualquier subagente, el orquestador SHALL puntuar la tarea en la escala 1-10, elegir el rol por conducta según el mapeo nivel→rol (1-4 `investigator`, 5-6 `builder` o `reviewer-lite` según sea implementación o review, 6-8 `reviewer`, 7+ divisible `sub-orchestrator`) y la combinación modelo+esfuerzo más barata que cubra el nivel, aplicando override de modelo sobre el default del rol cuando proceda. Nunca se delega a un modelo con capacidad muy superior a la necesaria.
 
 #### Scenario: Duda entre dos combinaciones que cubren la tarea
 - **WHEN** dos combinaciones modelo+esfuerzo cubren el nivel de la tarea
 - **THEN** se elige la más barata; si el resultado vuelve flojo, se re-lanza un nivel arriba
+
+#### Scenario: Nivel cubierto por rol con modelo superior al necesario
+- **WHEN** el nivel de la tarea lo cubre el rol con un modelo más barato que su default
+- **THEN** se invoca el rol con override de modelo hacia abajo, respetando el rango aceptable de la política (el effort del rol queda fijo)
 
 ### Requirement: Umbral mínimo de delegación
 El orquestador SHALL resolver inline lo resoluble en 1-2 tool calls; delegar eso cuesta más de lo que ahorra. Subtareas por debajo de ~nivel 3 se hacen inline o se agrupan en un solo agente.
@@ -48,3 +49,4 @@ Tareas que exigen gusto (escritura, API, UX, naming, docs) SHALL subir el MODELO
 #### Scenario: Redacción de docs nivel 3
 - **WHEN** una tarea nivel 3 consiste en escribir documentación visible para usuarios
 - **THEN** se delega a un modelo con Gusto ≥ 7 aunque la escala sugiera uno menor
+
