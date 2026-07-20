@@ -13,13 +13,18 @@ capacidad muy superior a la necesaria.
 
 ## Escala de capacidad
 
-| Nivel | Ejemplos | Agente / modelo+esfuerzo |
+| Nivel | Ejemplos | Rol (agente) / modelo+esfuerzo |
 |---|---|---|
-| 1–2 | búsqueda web puntual, leer un archivo, formatear, dato concreto | `scout` (sonnet, low) o GPT-5.6 Luna low vía codex |
-| 3–4 | exploración de código acotada, resumen multi-archivo, fix trivial | `explorer-lite` (sonnet) o Composer 2.5 / Terra medium |
-| 5–6 | feature pequeña, bug con repro claro, review de diff mediano | `builder` (sonnet, medium) o GPT-5.6 Sol medium / Opus 4.8 |
-| 7–8 | feature multi-archivo, refactor con riesgo, review de arquitectura, bug sutil | `reviewer` (opus, high) o Sol high–max, o descomponer |
-| 9–10 | diseño de sistema, decisiones ambiguas, coordinar sub-orquestadores | tú mismo (inline o fork), o `sub-orchestrator` por bloque |
+| 1–4 | búsqueda web puntual, leer/localizar dónde vive algo, resumen multi-archivo, exploración de código acotada, fix trivial | `investigator` (sonnet, medium) o GPT-5.6 Luna low / Composer 2.5 / Terra medium vía codex |
+| 5–6 (implementación) | feature pequeña, bug con repro claro | `builder` (sonnet, medium) o GPT-5.6 Sol medium / Opus 4.8 |
+| 5–6 (review) | review de diff chico | `reviewer-lite` (sonnet, medium) o GPT-5.6 Sol medium / Opus 4.8 |
+| 6–8 (review) | review profundo: arquitectura, bug sutil sin repro, lado Claude del review cruzado multi-modelo | `reviewer` (opus, high, **review-only**) o Sol high–max |
+| 7+ divisible | implementación grande: feature multi-archivo, refactor con riesgo | `sub-orchestrator` (opus, high) por bloque, o descomponer |
+| 9–10 | diseño de sistema, decisiones ambiguas, coordinar sub-orquestadores | tú mismo (inline o fork) |
+
+`reviewer` es **review-only** (lectura + Bash, no implementa): la
+implementación grande no vive en su fila sino en `7+ divisible` →
+`sub-orchestrator`.
 
 ## Mapeo modelo+esfuerzo → nivel
 
@@ -49,6 +54,24 @@ Ajustes sobre el nivel:
   resultado vuelve flojo, re-lanza un nivel arriba — un retry barato + un
   acierto caro sigue siendo más barato que empezar siempre con el cañón.
 - Nivel 9–10 → orquestador inline (o fork, que hereda modelo y contexto).
+
+## Contrato de invocación
+
+Todo prompt de delegación a un rol sigue este contrato, para que el agente
+conozca su umbral sin heurísticas propias:
+
+- **Rol**: el rol elegido de la tabla.
+- **Nivel N**: el nivel estimado y su porqué.
+- **Tarea**: contexto frío completo — rutas, decisiones ya tomadas,
+  hallazgos previos (el agente arranca sin memoria; todo va en el prompt).
+- **Aceptación**: criterio verificable de éxito.
+- **Escape**: si la tarea excede **N+1**, el agente para y reporta lo hecho
+  hasta ahí — no la fuerza.
+
+El `effort` va **congelado por rol** en modo interactivo: lo fija la
+definición del agente, y la invocación solo permite override del **modelo**,
+no del effort. Para effort fino por subtarea y fan-out dirigido, ese régimen
+vive en el SDK — ver change `workflows-reproducibles`.
 
 ## Descomposición (recursión)
 
